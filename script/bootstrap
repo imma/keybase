@@ -4,7 +4,10 @@ function main {
   local shome="$(cd -P -- "${BASH_SOURCE%/*}/.." && pwd -P)"
   source "$shome/script/profile"
 
-  uname -a
+  curl -O https://prerelease.keybase.io/keybase_amd64.deb
+  ${NOSUDO} sudo dpkg -i keybase_amd64.deb || true
+  rm -f keybase_amd64.deb
+  ${NOSUDO} sudo apt-get install -f
 }
 
 main "$@"
